@@ -56,7 +56,7 @@ function Formulario() {
         <form>
             <Campo>
                 <Label htmlFor="">Marca</Label>
-                <Select name="" id="">
+                <Select name="marca" value={marca}>
                     <option value="">---- Selecione ----</option>
                     <option value="americano">Americano</option>
                     <option value="europeo">Europeo</option>
@@ -65,7 +65,7 @@ function Formulario() {
             </Campo>
             <Campo>
                 <Label htmlFor="">Año</Label>
-                <Select name="" id="">
+                <Select name="year" value={year}>
                     <option value="">---- Selecione ----</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
@@ -84,11 +84,13 @@ function Formulario() {
                 <InputRadio type="radio" 
                     name="plan"
                     value="basico"
+                    checked={plan == 'basico'}
                 />Básico
 
                 <InputRadio type="radio" 
                     name="plan"
                     value="completo"
+                    checked={plan == 'completo'}
                 />Completo
             </Campo> 
             <Boton type="button">Cotizar</Boton>
