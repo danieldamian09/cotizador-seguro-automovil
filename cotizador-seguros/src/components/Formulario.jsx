@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled';
 
 const Campo = styled.div`
@@ -42,6 +42,16 @@ const Boton = styled.button`
 `;
 
 function Formulario() {
+
+    const [datos, guardarDatos] = useState({
+        marca:'',
+        year:'',
+        plan:''
+    });
+
+    // extraer los valores del state (variables)
+    const {marca, year, plan}
+
     return (
         <form>
             <Campo>
