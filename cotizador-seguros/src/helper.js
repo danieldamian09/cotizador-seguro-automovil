@@ -23,3 +23,8 @@ export function calcularMarca(marca) {
 
     return incremento;
 }
+
+// obtener el el porcentaje del plan para el aumento
+export function obtenerPlan(plan) {
+    return (plan === 'basico') ? 1.20 : 1.50;
+}
