@@ -41,6 +41,15 @@ const Boton = styled.button`
     }
 `;
 
+const Error = styled.div`
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 function Formulario() {
 
     const [datos, guardarDatos] = useState({
@@ -49,14 +58,41 @@ function Formulario() {
         plan:''
     });
 
+    const [error, guardarError] = useState(false)
+
     // extraer los valores del state (variables)
-    const {marca, year, plan}
+    const {marca, year, plan} = datos;
+
+    // guardar los datos del formulario en el estado
+    const obtenerInformacion = e => {
+        guardarDatos({
+            ...datos,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    // cuando el usuario presiona submit
+    const cotizarSeguro = e => {
+        e.preventDefault();
+
+        if(marca.trim() === '' || year.trim() === '' || plan.trim() === ''){
+            guardarError(true)
+            return;
+        }
+
+        guardarError(false);
+    }
 
     return (
-        <form>
+        <form
+            onSubmit={cotizarSeguro}
+        >
+
+            {error? <Error>Todos los campos son obligatorios</Error> : null}
+
             <Campo>
                 <Label htmlFor="">Marca</Label>
-                <Select name="marca" value={marca}>
+                <Select name="marca" value={marca} onChange={obtenerInformacion}>
                     <option value="">---- Selecione ----</option>
                     <option value="americano">Americano</option>
                     <option value="europeo">Europeo</option>
@@ -65,7 +101,7 @@ function Formulario() {
             </Campo>
             <Campo>
                 <Label htmlFor="">Año</Label>
-                <Select name="year" value={year}>
+                <Select name="year" value={year} onChange={obtenerInformacion}>
                     <option value="">---- Selecione ----</option>
                     <option value="2021">2021</option>
                     <option value="2020">2020</option>
@@ -84,16 +120,18 @@ function Formulario() {
                 <InputRadio type="radio" 
                     name="plan"
                     value="basico"
-                    checked={plan == 'basico'}
+                    checked={plan === 'basico'}
+                    onChange={obtenerInformacion}
                 />Básico
 
                 <InputRadio type="radio" 
                     name="plan"
                     value="completo"
-                    checked={plan == 'completo'}
+                    checked={plan === 'completo'}
+                    onChange={obtenerInformacion}
                 />Completo
             </Campo> 
-            <Boton type="button">Cotizar</Boton>
+            <Boton type="submit">Cotizar</Boton>
         </form>
     )
 }
