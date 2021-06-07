@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { obtenerDiferenciaYear } from '../helper'
 import styled from '@emotion/styled';
 
 const Campo = styled.div`
@@ -81,7 +82,30 @@ function Formulario() {
         }
 
         guardarError(false);
+
+        // base para hacer los calculos
+        let resultado = 2000;
+
+        // obtener la diferencia de años
+
+        const diferencia = obtenerDiferenciaYear(year);
+        // console.log(diferencia)
+
+        // por cada año hay que restar el 3%
+
+        resultado -= ((diferencia * 3) * resultado) / 100;
+        console.log(resultado)
+
+        // americano 15%
+        // asiatico 5%
+        // europeo 30%
+
+        // Basico aumenta 20%
+        // Complero aumeta 50%
+
+        // Total
     }
+    
 
     return (
         <form
